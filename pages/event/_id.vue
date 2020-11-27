@@ -7,20 +7,23 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-    async asyncData({ $axios, params, error }) {
+    async fetch({ store, params, error }) {
         try {
-            const { data } = await $axios.get(
-                `http://localhost:3000/events/${params.id}`
-            );
-            console.log(data);
-            return { event: data };
-        } catch (e) {
+            await store.dispatch("events/fetchEvent", params.id);
+        } catch (err) {
             error({
                 statusCode: 503,
                 message: "event page server fetch api failed"
             });
         }
+    },
+    computed: {
+        ...mapState({
+            event: state => state.events.event
+        })
     },
     head() {
         return {

@@ -9,25 +9,25 @@
 
 <script>
 import EventCard from "~/components/EventCard";
+import { mapState } from "vuex";
+
 export default {
-    data() {
-        return {
-            events: []
-        };
-    },
     head() {
         return {
             title: "Home"
         };
     },
-    async asyncData({ $axios, error }) {
+    async fetch({ store, error }) {
         try {
-            const { data } = await $axios.get("http://localhost:3000/events");
-            console.log(data);
-            return { events: data };
+            await store.dispatch("events/fetchEvents");
         } catch (e) {
             error({ statusCode: 503, message: "server fetch api failed" });
         }
+    },
+    computed: {
+        ...mapState({
+            events: state => state.events.events
+        })
     }
 };
 </script>
