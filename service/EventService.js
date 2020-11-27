@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://my-json-server.typicode.com/NEOTSO/nuxt-demo",
+    baseURL: "https://my-json-server.typicode.com/NEOTSO/nuxt-demo",
     withCredentials: false,
     headers: {
         Accept: "application/json",
