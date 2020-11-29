@@ -17,13 +17,13 @@ export default {
             title: "Home"
         };
     },
-    async fetch({ store, error }) {
-        try {
-            await store.dispatch("events/fetchEvents");
-        } catch (e) {
-            error({ statusCode: 503, message: "server fetch api failed" });
-        }
-    },
+    // async fetch({ store, error }) {
+    //     try {
+    //         await store.dispatch("events/fetchEvents");
+    //     } catch (e) {
+    //         error({ statusCode: 503, message: "server fetch api failed" });
+    //     }
+    // },
     computed: {
         ...mapState({
             events: state => state.events.events
